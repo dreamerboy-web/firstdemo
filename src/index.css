@@ -107,3 +107,8 @@ code {
     transform: translate(-22px,5px) skew(21deg);
   }
 }
+.some{
+  background-color: #fff;
+  width: 100%;
+  border-radius: 10px;
+}

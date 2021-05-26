@@ -15,6 +15,7 @@ import Shoes from "../Shoes/Shoes";
 import ShoesSmall from "../ShoesSmall/ShoesSmall";
 import Messanger from "../Messanger/Messanger";
 import Last from "../Last/Last";
+import CalendarExample from '../Calendar/Calendar'
 
 
 export default function All(){
@@ -52,7 +53,10 @@ export default function All(){
 
                 <div className="second-item">
                     <div>
-                        <Time />
+                        {/*<Time />*/}
+                        <div className="some">
+                            <CalendarExample/>
+                        </div>
                         {/*<Calendar />*/}
                     </div>
                     <div>

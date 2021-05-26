@@ -1,59 +1,18 @@
-import React from 'react';
-import './calendar.scss';
-
-
-
-import mobiscroll from '@mobiscroll/react-lite';
-import "@mobiscroll/react-lite/dist/css/mobiscroll.min.css";
-
-mobiscroll.settings = {
-    lang: 'ua',
-    theme: 'ios',
-    themeVariant: 'light'
-};
-
-
-class Calendar extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            view: 'month',
-            weeks: 6
-        };
+import React, { useState } from 'react'
+import { isSameDay } from 'date-fns'
+import { enGB } from 'date-fns/locale'
+import { Calendar } from 'react-nice-dates'
+import 'react-nice-dates/build/style.css'
+// Very rough implementation of multiple date selection
+export default function CalendarExample() {
+    const [selectedDates, setSelectedDates] = useState([])
+    const modifiers = {
+        selected: date => selectedDates.some(selectedDate => isSameDay(selectedDate, date))
     }
-    changeView = (event) => {
-        let weekNr = 0;
-        switch (event.target.value) {
-            case 'month':
-                weekNr = 6;
-                break;
-            case 'week':
-                weekNr = 1;
-                break;
-        }
-        this.setState({
-            view: event.target.value,
-            weeks: weekNr
-        });
+    const handleDayClick = date => {
+        setSelectedDates([...selectedDates, date])
     }
-    render () {
-        return (
-            <mobiscroll.Form>
-                <mobiscroll.FormGroup>
-                    <mobiscroll.FormGroupTitle>Month view and week view</mobiscroll.FormGroupTitle>
-                    <mobiscroll.Segmented name="view" value="month" checked={this.state.view === 'month'} onChange={this.changeView}>
-                        Month
-                    </mobiscroll.Segmented>
-                    <mobiscroll.Segmented name="view" value="week" checked={this.state.view === 'week'} onChange={this.changeView}>
-                        Week
-                    </mobiscroll.Segmented>
-                    <mobiscroll.Calendar display="inline" type="hidden" weeks={this.state.weeks} />
-                </mobiscroll.FormGroup>
-            </mobiscroll.Form>
-        );
-    }
+    return (
+        <Calendar onDayClick={handleDayClick} modifiers={modifiers} locale={enGB} />
+    )
 }
-
-
-export default Calendar
