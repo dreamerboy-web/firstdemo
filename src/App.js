@@ -64,6 +64,7 @@ function App() {
               <Route exact path='/' component={All}/>
               <Route exact path='/none' component={None}/>
               <Route exact path='/test' component={Test}/>
+                <Route exact path='/jquery' component={Gogo}/>
             </Switch>
 
 
